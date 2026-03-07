@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>English | Janala</title>
-  <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/logo1.png" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -21,8 +21,8 @@
 
 <body>
   <header>
-    <div class="navbar bg-base-100 shadow-sm">
-      <div class="navbar-start">
+    <div class="navbar bg-sky-50 shadow-sm md:px-8">
+      <div class="navbar-start gap-1 md:gap-0">
         <div class="dropdown">
           <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -32,19 +32,19 @@
           </div>
           <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
             <li>
-            <a href=""><i class="fa-solid fa-circle-question"></i>FAQ</a>
-          </li>
-          <li>
-            <a href=""><i class="fa-solid fa-book-open"></i>Learn</a>
-          </li>
-          <li>
-            <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-          </li>
+              <a href=""><i class="fa-solid fa-circle-question"></i>FAQ</a>
+            </li>
+            <li>
+              <a href=""><i class="fa-solid fa-book-open"></i>Learn</a>
+            </li>
+            <li>
+              <a href=""><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+            </li>
           </ul>
         </div>
         <a class="flex items-center gap-1">
           <span class="font-bold text-lg">English</span>
-          <img src="assets/logo.png" alt="">
+          <img src="assets/logo.png" class="max-h-6" alt="">
           <span class="bangla-font font-semibold text-lg">জানালা</span>
         </a>
       </div>
@@ -61,9 +61,26 @@
           </li>
         </ul>
       </div>
-      
+
     </div>
   </header>
+
+  <section class="flex flex-col md:flex-row items-center justify-between mt-10 md:mt-20 w-11/12 mx-auto gap-10">
+    <div class="content flex-1 text-center md:text-left">
+      <h2 class="text-4xl font-bold mb-5"><span class="text-info">English</span> is Easy!!</h2>
+      <p class="bangla-font mb-5">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান,
+        আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
+      <div class="flex flex-col gap-4 items-center md:items-start">
+        <input type="text" placeholder="Enter Your Name" class="input" />
+        <input type="text" placeholder="Enter Your Password" class="input" />
+        <button class="btn btn-primary w-max">Get Started</button>
+      </div>
+    </div>
+    <div class="image flex-1 justify-center flex text-[200px] md:text-[300px] opacity-60">
+      <i class="fa-solid fa-circle-user"></i>
+    </div>
+  </section>
+
 </body>
 
 </html>
