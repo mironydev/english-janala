@@ -65,25 +65,33 @@
     </div>
   </header>
 
-  <section class="flex flex-col md:flex-row items-center justify-between mt-10 md:mt-20 w-11/12 mx-auto gap-10">
-    <div class="content flex-1 text-center md:text-left">
+  <section id="sign-in" class="flex flex-col md:flex-row items-center mt-10 md:mt-20 mx-auto gap-10 w-11/12 lg:w-[80%]">
+    <div class="content  text-center md:text-left">
       <h2 class="text-4xl font-bold mb-5"><span class="text-info">English</span> is Easy!!</h2>
-      <p class="bangla-font mb-5">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার দক্ষতা বাড়াতে চান,
-        আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
+      <p class="bangla-font mb-5 lg:w-[70%]">আজ থেকেই আপনার ভাষা শেখার যাত্রা শুরু করুন। আপনি যদি নতুন হন অথবা আপনার
+        দক্ষতা বাড়াতে চান, আমাদের Interactive Lessons আপনাকে নিয়ে যাবে অন্য একটি Level এ</p>
       <div class="flex flex-col gap-4 items-center md:items-start">
         <input type="text" placeholder="Enter Your Name" class="input" />
         <input type="text" placeholder="Enter Your Password" class="input" />
         <button class="btn btn-primary w-max">Get Started</button>
       </div>
     </div>
-    <div class="image flex-1 justify-center flex text-[200px] md:text-[300px] opacity-60">
+    <div class="image flex  justify-end text-[200px] md:text-[300px] opacity-60">
       <i class="fa-solid fa-circle-user"></i>
     </div>
   </section>
 
-  <section class="mt-10 md:mt-20">
+  <section id="all-lessons" class="mt-10 md:mt-20">
     <h2 class="text-3xl font-bold mb-5 text-center"><span class="text-info">Let's</span> Let's Learn Vocabularies</h2>
     <div id="level-container" class="flex flex-wrap justify-center gap-5"></div>
+  </section>
+
+  <section id="word-container"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-center mt-10 w-11/12 bg-gray-100 mx-auto rounded-xl p-5">
+    <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl p-8 col-span-full">
+      <p class="bangla-font text-sm mb-2 opacity-80">আপনি এখনো কোনো Lesson Select করেন নি।</p>
+      <h2 class="bangla-font text-3xl font-semibold">একটি Lesson Select করুন</h2>
+    </div>
   </section>
 
   <script src="script/index.js"></script>
