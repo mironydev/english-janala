@@ -9,16 +9,63 @@ const removeActiveClass = () => {
   lessonBtns.forEach(btn => btn.classList.remove('active'));
 }
 
-const loadWords = (id) => {
-  fetch(`https://openapi.programming-hero.com/api/level/${id}`)
+const loadWords = (levelNUmber) => {
+  fetch(`https://openapi.programming-hero.com/api/level/${levelNUmber}`)
     .then(res => res.json())
     .then(data => {
       removeActiveClass();
-      const clickedBtn = document.getElementById(`lesson-btn-${id}`);
+      const clickedBtn = document.getElementById(`lesson-btn-${levelNUmber}`);
       clickedBtn.classList.add('active');
       displayWord(data.data)
     });
 };
+
+const loadWordDetails = async (word_id) => {
+  const res = await fetch(`https://openapi.programming-hero.com/api/word/${word_id}`);
+  const data = await res.json();
+  displayWordDetails(data.data);
+}
+
+const createElementForSynonyms = (arr) => {
+  const htmlElements = arr.map((element) => `<p class="bg-sky-100 px-4 p-2 rounded-xl">${element}</p>`);
+  return htmlElements.join(" ");
+}
+
+const displayWordDetails = (word) => {
+
+  //   "data": {
+  // "word": "Eager",
+  // "meaning": "আগ্রহী",
+  // "pronunciation": "ইগার",
+  // "level": 1,
+  // "sentence": "The kids were eager to open their gifts.",
+  // "points": 1,
+  // "partsOfSpeech": "adjective",
+  // "synonyms": [
+  // "enthusiastic",
+  // "excited",
+  // "keen"
+  // ],
+  // "id": 5
+  // }
+
+  const wordDetailscontainer = document.getElementById('word-details-container');
+  wordDetailscontainer.innerHTML = `
+  <div class="px-4 pt-4">
+    <h2 class="text-3xl font-semibold bangla-font">${word.word ? word.word : ('শব্দ পাওয়া যায়নি')} (<i class="fa-solid fa-microphone-lines"></i>: ${word.pronunciation ? word.pronunciation : '(উচ্চারণ পাওয়া যায়নি)'})</h2>
+    <p class="text-xl font-semibold pt-6 pb-2">Meaning</p>
+    <p class="text-xl font-medium bangla-font">${word.meaning ? word.meaning : '(অর্থ পাওয়া যায়নি)'}</p>
+    <p class="text-xl font-semibold pt-6 pb-2">Example</p>
+    <p class="text-xl">${word.sentence ? word.sentence : 'উদাহরণ পাওয়া যায়নি'}</p>
+    <p class="text-xl font-semibold pt-6 pb-2">Synonyms</p>
+    <div class="flex gap-2">
+      ${word.synonyms.length > 0 ? createElementForSynonyms(word.synonyms) : '<p class="text-xl font-medium bangla-font">(সমার্থক শব্দ পাওয়া যায়নি)</p>'}
+    </div>
+  </div>
+  `;
+
+  document.getElementById('my_modal_5').showModal();
+}
 
 const displayWord = (words) => {
   const wordContainer = document.getElementById('word-container');
@@ -43,8 +90,8 @@ const displayWord = (words) => {
       <p class="font-medium text-x my-5">Meaning / Pronunciation</p>
       <p class="font-semibold text-2xl opacity-80 bangla-font">"${word.meaning ? word.meaning : "(অর্থ পাওয়া যায়নি)"} / ${word.pronunciation ? word.pronunciation : "(উচ্চারণ পাওয়া যায়নি)"}"</p>
       <div class="flex justify-between items-center mt-4">
-        <button class="bg-sky-100 px-3 py-2 rounded-md opacity-80"><i class="fa-solid fa-circle-info"></i></button>
-        <button class="bg-sky-100 px-3 py-2 rounded-md opacity-80"><i class="fa-solid fa-volume-high"></i></button>
+        <button onclick="loadWordDetails(${word.id})" class="bg-sky-100 px-3 py-2 rounded-md opacity-80 outline-none cursor-pointer hover:bg-sky-300 duration-200"><i class="fa-solid fa-circle-info"></i></button>
+        <button class="bg-sky-100 px-3 py-2 rounded-md opacity-80 cursor-pointer hover:bg-sky-300 duration-200"><i class="fa-solid fa-volume-high"></i></button>
       </div>
     </div>
     `;
