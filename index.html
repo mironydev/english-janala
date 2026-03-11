@@ -86,6 +86,21 @@
     <div id="level-container" class="flex flex-wrap justify-center gap-5"></div>
   </section>
 
+  <section id="search" class="flex justify-center items-center mt-10">
+    <div class="join">
+  <div>
+    <label class="input join-item outline-0 duration-100">
+      <input id="search-input" type="text" placeholder="Search vocabulary"/>
+    </label>
+  </div>
+  <button id="search-button" class="btn btn-primary join-item">Search</button>
+</div>
+  </section>
+
+  <section id="loading-animation" class="flex justify-center items-center pt-20 pb-96 mb-96 hidden">
+    <span class="loading loading-dots loading-xl"></span>
+  </section>
+
   <section id="word-container"
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-center mt-10 w-11/12 bg-gray-100 mx-auto rounded-xl p-5">
     <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl p-8 col-span-full">

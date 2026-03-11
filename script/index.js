@@ -4,12 +4,25 @@ const loadLessons = () => {
     .then(data => displayLesson(data.data));
 };
 
+const loadingAnimation = (isLoading) => {
+  const animation = document.getElementById('loading-animation');
+  const levelContainer = document.getElementById('word-container');
+  if (isLoading) {
+    animation.classList.remove('hidden');
+    levelContainer.classList.add('hidden');
+  } else {
+    animation.classList.add('hidden');
+    levelContainer.classList.remove('hidden');
+  }
+}
+
 const removeActiveClass = () => {
   const lessonBtns = document.querySelectorAll('.lesson-btn');
   lessonBtns.forEach(btn => btn.classList.remove('active'));
 }
 
 const loadWords = (levelNUmber) => {
+  loadingAnimation(true);
   fetch(`https://openapi.programming-hero.com/api/level/${levelNUmber}`)
     .then(res => res.json())
     .then(data => {
@@ -33,22 +46,6 @@ const createElementForSynonyms = (arr) => {
 
 const displayWordDetails = (word) => {
 
-  //   "data": {
-  // "word": "Eager",
-  // "meaning": "আগ্রহী",
-  // "pronunciation": "ইগার",
-  // "level": 1,
-  // "sentence": "The kids were eager to open their gifts.",
-  // "points": 1,
-  // "partsOfSpeech": "adjective",
-  // "synonyms": [
-  // "enthusiastic",
-  // "excited",
-  // "keen"
-  // ],
-  // "id": 5
-  // }
-
   const wordDetailscontainer = document.getElementById('word-details-container');
   wordDetailscontainer.innerHTML = `
   <div class="px-4 pt-4">
@@ -67,6 +64,12 @@ const displayWordDetails = (word) => {
   document.getElementById('my_modal_5').showModal();
 }
 
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "en-EN"; // English
+  window.speechSynthesis.speak(utterance);
+}
+
 const displayWord = (words) => {
   const wordContainer = document.getElementById('word-container');
   wordContainer.innerHTML = '';
@@ -79,6 +82,7 @@ const displayWord = (words) => {
       <h2 class="bangla-font text-3xl font-semibold">নেক্সট Lesson এ যান</h2>
     </div>
     `;
+    loadingAnimation(false);
     return;
   }
 
@@ -91,13 +95,13 @@ const displayWord = (words) => {
       <p class="font-semibold text-2xl opacity-80 bangla-font">"${word.meaning ? word.meaning : "(অর্থ পাওয়া যায়নি)"} / ${word.pronunciation ? word.pronunciation : "(উচ্চারণ পাওয়া যায়নি)"}"</p>
       <div class="flex justify-between items-center mt-4">
         <button onclick="loadWordDetails(${word.id})" class="bg-sky-100 px-3 py-2 rounded-md opacity-80 outline-none cursor-pointer hover:bg-sky-300 duration-200"><i class="fa-solid fa-circle-info"></i></button>
-        <button class="bg-sky-100 px-3 py-2 rounded-md opacity-80 cursor-pointer hover:bg-sky-300 duration-200"><i class="fa-solid fa-volume-high"></i></button>
+        <button onclick="pronounceWord('${word.word}')" class="bg-sky-100 px-3 py-2 rounded-md opacity-80 cursor-pointer hover:bg-sky-300 duration-200"><i class="fa-solid fa-volume-high"></i></button>
       </div>
     </div>
     `;
     wordContainer.appendChild(wordCard);
   }
-
+  loadingAnimation(false);
 };
 
 const displayLesson = (lessons) => {
@@ -114,3 +118,17 @@ const displayLesson = (lessons) => {
 };
 
 loadLessons();
+
+document.getElementById('search-button')
+  .addEventListener('click', () => {
+    removeActiveClass();
+    const searchValue = document.getElementById('search-input').value.trim().toLowerCase();
+
+    fetch('https://openapi.programming-hero.com/api/words/all')
+      .then(res => res.json())
+      .then(data => {
+        const allWords = data.data;
+        const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
+        displayWord(filterWords);
+      });
+  })
