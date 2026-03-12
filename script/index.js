@@ -131,17 +131,17 @@ document.getElementById('search-button')
         const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
         displayWord(filterWords);
       });
-  })
+  });
 
 document.querySelectorAll('.faq-btn').forEach(btn => {
-   btn.addEventListener('click', () => {
-  const faqDescription = btn.closest('.faq-item').querySelector('.faq-description');
-  if (btn.innerText === '+') {
-    faqDescription.classList.remove('hidden');
-    btn.innerText = '-';
-  } else {
-    faqDescription.classList.add('hidden');
-    btn.innerText = '+';
-  }
-})
+  btn.addEventListener('click', () => {
+    const faqDescription = btn.closest('.faq-item').querySelector('.faq-description');
+    if (btn.innerText === '+') {
+      faqDescription.classList.remove('hidden');
+      btn.innerText = '-';
+    } else {
+      faqDescription.classList.add('hidden');
+      btn.innerText = '+';
+    }
+  });
 });

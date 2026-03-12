@@ -14,3 +14,14 @@
 html {
   scrollbar-gutter: stable;
 }
+
+.faq-btn-style {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 18px;
+  border-radius: 12px;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
