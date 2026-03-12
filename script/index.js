@@ -76,7 +76,7 @@ const displayWord = (words) => {
 
   if (words.length === 0) {
     wordContainer.innerHTML = `
-    <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl p-8 col-span-full">
+    <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl py-2 md:p-8 col-span-full">
       <span class="text-5xl"><i class="fa-solid fa-triangle-exclamation"></i></span>
       <p class="bangla-font text-sm opacity-80 mt-4 mb-2">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
       <h2 class="bangla-font text-3xl font-semibold">নেক্সট Lesson এ যান</h2>

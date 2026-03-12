@@ -81,12 +81,12 @@
     </div>
   </section>
 
-  <section id="all-lessons" class="mt-10 md:mt-20">
+  <section id="all-lessons" class="mt-16 md:mt-20">
     <h2 class="text-3xl font-bold mb-5 text-center"><span class="text-info">Let's</span> Let's Learn Vocabularies</h2>
     <div id="level-container" class="flex flex-wrap justify-center gap-5"></div>
   </section>
 
-  <section id="search" class="flex justify-center items-center mt-10">
+  <section id="search" class="relative flex justify-center items-center mt-10 w-11/12 mx-auto">
     <div class="join">
       <div>
         <label class="input join-item outline-0 duration-100">
@@ -95,15 +95,16 @@
       </div>
       <button id="search-button" class="btn btn-primary join-item">Search</button>
     </div>
+    <button class="btn btn-primary absolute right-0">Saved Words: 0</button>
   </section>
-
+    
   <section id="loading-animation" class="flex justify-center items-center pt-20 pb-96 mb-96 hidden">
     <span class="loading loading-dots loading-xl"></span>
   </section>
 
   <section id="word-container"
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-center mt-10 w-11/12 bg-gray-100 mx-auto rounded-xl p-5">
-    <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl p-8 col-span-full">
+    <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl py-5 md:p-8 col-span-full">
       <p class="bangla-font text-sm mb-2 opacity-80">আপনি এখনো কোনো Lesson Select করেন নি।</p>
       <h2 class="bangla-font text-3xl font-semibold">একটি Lesson Select করুন</h2>
     </div>
@@ -124,7 +125,7 @@
 
   </section>
 
-  <section id="faq" class="flex flex-col w-11/12 mx-auto mt-10 md:mt-20 gap-5">
+  <section id="faq" class="flex flex-col w-11/12 mx-auto mt-16 md:mt-20 gap-5">
     <div>
       <h2 class="text-3xl font-bold mb-5 text-center"><span class="text-info">Frequently</span> Asked Questions</h2>
     </div>
@@ -165,11 +166,43 @@
     <div class="relative p-5 bg-gray-100 rounded-xl flex justify-between faq-item">
       <div class="flex flex-col gap-2">
         <p class="font-medium text-lg pr-5">5. Do you offer certificates for completed courses?</p>
-        <p class="faq-description font-normal opacity-70 hidden">Yes, certificates are available for certain courses once you finish them.</p>
+        <p class="faq-description font-normal opacity-70 hidden">Yes, certificates are available for certain courses
+          once you finish them.</p>
       </div>
       <button class="faq-btn faq-btn-style active:scale-150 text-2xl font-normal">+</button>
     </div>
 
+  </section>
+
+  <section id="info" class="flex flex-col md:flex-row mx-auto items-center md:items-start justify-between w-11/12 mt-16 md:mt-20 gap-8 md:gap-0">
+    <div>
+      <a class="flex items-center gap-1">
+        <span class="font-semibold text-xl">English</span>
+        <img src="assets/logo.png" class="max-h-6" alt="">
+        <span class="bangla-font font-semibold text-lg">জানালা</span>
+      </a>
+      <div>
+        <p class="font-medium text-lg bangla-font pt-2">ইংরেজি শিখুন সহজে</p>
+      </div>
+    </div>
+    <div>
+      <p class="font-semibold opacity-60 text-center">Follow Us</p>
+      <div class="flex items-center gap-3 mt-2">
+        <a href=""><img src="assets/fb-thumb.png" alt=""></a>
+        <a href=""><img src="assets/youtube-thumb.png" alt=""></a>
+        <a href=""><img src="assets/instagram-thumb.png" alt=""></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="footer" class="text-center flex justify-center bg-sky-50 py-5 mt-10 text-sm md:text-base">
+    <p class="text-center flex flex-wrap items-center justify-center">
+      © 2026&nbsp;
+      <a class="flex items-center gap-1 text-center">
+        <span>English</span>
+        <img src="assets/logo.png" class="max-h-4 md:max-h-6 grayscale" alt="">
+        <span>Janala.</span>
+      </a>&nbsp;All rights reserved.</p>
   </section>
 
   <script src="script/index.js"></script>
