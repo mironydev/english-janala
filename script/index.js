@@ -70,8 +70,8 @@ function pronounceWord(word) {
   window.speechSynthesis.speak(utterance);
 }
 
+const wordContainer = document.getElementById('word-container');
 const displayWord = (words) => {
-  const wordContainer = document.getElementById('word-container');
   wordContainer.innerHTML = '';
 
   if (words.length === 0) {
@@ -89,7 +89,11 @@ const displayWord = (words) => {
   for (const word of words) {
     const wordCard = document.createElement('div');
     wordCard.innerHTML = `
-    <div class="card bg-base-100 p-10">
+    <div class="relative card bg-base-100 p-10">   
+      <span onclick="toggleSaveWord(this, ${word.id})" class="absolute right-5 top-5 heart-icon text-xl cursor-pointer">
+        <i class="${savedWords.includes(word.id) ? 'fa-solid text-pink-500' : 'fa-regular'} fa-heart"></i>
+      </span>
+
       <p class="font-bold text-3xl">${word.word ? word.word : "(শব্দ পাওয়া যায়নি)"}</p>
       <p class="font-medium text-x my-5">Meaning / Pronunciation</p>
       <p class="font-semibold text-2xl opacity-80 bangla-font">"${word.meaning ? word.meaning : "(অর্থ পাওয়া যায়নি)"} / ${word.pronunciation ? word.pronunciation : "(উচ্চারণ পাওয়া যায়নি)"}"</p>
@@ -103,6 +107,7 @@ const displayWord = (words) => {
   }
   loadingAnimation(false);
 };
+
 
 const displayLesson = (lessons) => {
   const levelContainer = document.getElementById('level-container');
@@ -119,19 +124,31 @@ const displayLesson = (lessons) => {
 
 loadLessons();
 
-document.getElementById('search-button')
-  .addEventListener('click', () => {
-    removeActiveClass();
-    const searchValue = document.getElementById('search-input').value.trim().toLowerCase();
+document.getElementById('search-button').addEventListener('click', () => {
+  loadingAnimation(true);
+  removeActiveClass();
+  const searchInput = document.getElementById('search-input');
+  const searchValue = searchInput.value.trim().toLowerCase();
 
-    fetch('https://openapi.programming-hero.com/api/words/all')
-      .then(res => res.json())
-      .then(data => {
-        const allWords = data.data;
-        const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
-        displayWord(filterWords);
-      });
-  });
+  fetch('https://openapi.programming-hero.com/api/words/all')
+    .then(res => res.json())
+    .then(data => {
+      const allWords = data.data;
+      const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
+      if (!searchValue || filterWords.length === 0) {
+        wordContainer.innerHTML = `
+        <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl py-2 md:p-8 col-span-full">
+          <span class="text-5xl"><i class="fa-solid fa-triangle-exclamation"></i></span>
+          <h2 class="bangla-font text-3xl font-semibold pt-4">কোন শব্দ পাওয়া যায়নি</h2>
+          <p class="bangla-font text-sm opacity-80 mt-2">সঠিক শব্দ লিখে Search করুন।</p>
+        </div>
+        `;
+        loadingAnimation(false);
+        return;
+      }
+      displayWord(filterWords);
+    });
+});
 
 document.querySelectorAll('.faq-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -143,5 +160,45 @@ document.querySelectorAll('.faq-btn').forEach(btn => {
       faqDescription.classList.add('hidden');
       btn.innerText = '+';
     }
+  });
+});
+
+const savedWords = [];
+
+const toggleSaveWord = (element, wordId) => {
+  const heartIcon = element.querySelector('i');
+  heartIcon.classList.toggle('fa-regular');
+  heartIcon.classList.toggle('fa-solid');
+  heartIcon.classList.toggle('text-pink-500');
+
+  if (savedWords.includes(wordId)) {
+    savedWords.splice(savedWords.indexOf(wordId), 1);
+  } else {
+    savedWords.push(wordId);
+  }
+
+  document.getElementById('saved-words-btn').innerText = `Saved Words: ${savedWords.length}`;
+};
+
+document.getElementById('saved-words-btn').addEventListener('click', () => {
+  removeActiveClass();
+  if (savedWords.length === 0) {
+    wordContainer.innerHTML = `
+      <div class="text-cente w-11/12 bg-gray-100 mx-auto rounded-xl py-2 md:p-8 col-span-full">
+        <span class="text-5xl"><i class="fa-solid fa-triangle-exclamation"></i></span>
+        <h2 class="bangla-font text-3xl font-semibold pt-4">কোন শব্দ Save করা হয়নি</h2>
+        <p class="bangla-font text-sm opacity-80 mt-2">শব্দ Save করতে Heart Icon এ ক্লিক করুন।</p>
+      </div>
+      `;
+    return;
+  }
+  loadingAnimation(true);
+  const requests = savedWords.map(id =>
+    fetch(`https://openapi.programming-hero.com/api/word/${id}`)
+      .then(res => res.json())
+      .then(data => data.data)
+  );
+  Promise.all(requests).then(words => {
+    displayWord(words);
   });
 });

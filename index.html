@@ -32,7 +32,7 @@
           </div>
           <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
             <li>
-              <a href=""><i class="fa-solid fa-circle-question"></i>FAQ</a>
+              <a href="#faq"><i class="fa-solid fa-circle-question"></i>FAQ</a>
             </li>
             <li>
               <a href=""><i class="fa-solid fa-book-open"></i>Learn</a>
@@ -51,7 +51,7 @@
       <div class="navbar-end hidden lg:flex">
         <ul class="menu menu-horizontal px-1 space-x-4">
           <li>
-            <a href="" class="btn btn-outline btn-primary"><i class="fa-solid fa-circle-question"></i>FAQ</a>
+            <a href="#faq" class="btn btn-outline btn-primary"><i class="fa-solid fa-circle-question"></i>FAQ</a>
           </li>
           <li>
             <a href="" class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open"></i>Learn</a>
@@ -86,18 +86,19 @@
     <div id="level-container" class="flex flex-wrap justify-center gap-5"></div>
   </section>
 
-  <section id="search" class="relative flex justify-center items-center mt-10 w-11/12 mx-auto">
+  <section id="search" class="relative flex flex-col-reverse gap-4 justify-center items-center mt-10 w-11/12 mx-auto">
     <div class="join">
       <div>
         <label class="input join-item outline-0 duration-100">
-          <input id="search-input" type="text" placeholder="Search vocabulary" />
+          <input id="search-input" type="text" placeholder="Search vocabulary"/>
         </label>
       </div>
       <button id="search-button" class="btn btn-primary join-item">Search</button>
     </div>
-    <button class="btn btn-primary absolute right-0">Saved Words: 0</button>
+    <button id="saved-words-btn" class="btn bg-[#cccaff] hover:bg-[#422AD5] hover:text-white md:absolute right-0">Saved
+      Words: 0</button>
   </section>
-    
+
   <section id="loading-animation" class="flex justify-center items-center pt-20 pb-96 mb-96 hidden">
     <span class="loading loading-dots loading-xl"></span>
   </section>
@@ -174,7 +175,8 @@
 
   </section>
 
-  <section id="info" class="flex flex-col md:flex-row mx-auto items-center md:items-start justify-between w-11/12 mt-16 md:mt-20 gap-8 md:gap-0">
+  <section id="info"
+    class="flex flex-col md:flex-row mx-auto items-center md:items-start justify-between w-11/12 mt-16 md:mt-20 gap-8 md:gap-0">
     <div>
       <a class="flex items-center gap-1">
         <span class="font-semibold text-xl">English</span>
@@ -202,7 +204,8 @@
         <span>English</span>
         <img src="assets/logo.png" class="max-h-4 md:max-h-6 grayscale" alt="">
         <span>Janala.</span>
-      </a>&nbsp;All rights reserved.</p>
+      </a>&nbsp;All rights reserved.
+    </p>
   </section>
 
   <script src="script/index.js"></script>
